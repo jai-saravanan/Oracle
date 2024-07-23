@@ -1,0 +1,1 @@
+Harshitha|caseNumber|docType|docCategory|masNumber|scanDate|status|documentId|controlNumber|scanOperator|externalId|internalId|source|fileType|fileSize|receivedDate|message|otherData|url|macId|batchName|receivedTime
