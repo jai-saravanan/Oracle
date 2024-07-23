@@ -19,7 +19,7 @@ namespace Oracle.Controllers
         }
 
         [HttpPost(Name = "Create")]
-        public async Task<ApiResponse> Create(ImageAppInfo appInfo, String customPrefix, String dateStringFormat,
+        public async Task<ApiResponse> Create([FromBody] ImageAppInfo appInfo, String customPrefix, String dateStringFormat,
                                       String filePath, String caseNumber, String masNumber, String docType,
                                       DateTime scanDate, String status, String documentId, String controlNumber,
                                       String scanOperator, String externalId, String internalId, String source,
@@ -199,6 +199,21 @@ namespace Oracle.Controllers
                 Result = ApiResult.Success,
             };
             return result;
+        }
+
+        [HttpPost(Name = "GetMetaDataByPath")]
+        public void GetMetaDataByPath(string path) 
+        {
+            //path => public image url/ 
+
+
+            // download image
+
+            // extracting image metadata
+
+            // storing it in the server as metadata/property text file
+
+            // return response
         }
 
 
