@@ -27,12 +27,45 @@ namespace Oracle.Controllers
                                       String otherData, String url, String docCategory, String macId, String batchName)
         {
             _logger.LogInformation($"{nameof(Create)} for file {filePath} begins.");
-            var result = CreateMetadata(appInfo, customPrefix, dateStringFormat, filePath, caseNumber, masNumber,
+            var result = CreateLocalMethod(appInfo, customPrefix, dateStringFormat, filePath, caseNumber, masNumber,
                                         docType, scanDate, status, documentId, controlNumber, scanOperator, externalId,
                                         internalId, source, fileType, fileSize, receivedDate, message, otherData, url,
                                         docCategory, macId, batchName);
             _logger.LogInformation($"{nameof(Create)} for file {filePath} ends. Result was {result.Result}");
             return result;
+        }
+
+        private ApiResponse CreateLocalMethod(ImageAppInfo appInfo, String customPrefix, String dateStringFormat,
+                                      String filePath, String caseNumber, String masNumber, String docType,
+                                      DateTime scanDate, String status, String documentId, String controlNumber,
+                                      String scanOperator, String externalId, String internalId, String source,
+                                      String fileType, String fileSize, DateTime receivedDate, String message,
+                                      String otherData, String url, String docCategory, String macId, String batchName)
+        {
+            int retryCount = 0;
+            int maxRetry = 5;
+            ApiResponse apiResponse = null;
+            try
+            {
+                apiResponse = CreateMetadata(appInfo, customPrefix, dateStringFormat, filePath, caseNumber, masNumber,
+                                        docType, scanDate, status, documentId, controlNumber, scanOperator, externalId,
+                                        internalId, source, fileType, fileSize, receivedDate, message, otherData, url,
+                                        docCategory, macId, batchName);
+            }
+            catch (Exception)
+            {
+                retryCount = retryCount + 1;
+                if(retryCount <= maxRetry)
+                {
+                    apiResponse = CreateMetadata(appInfo, customPrefix, dateStringFormat, filePath, caseNumber, masNumber,
+                                                            docType, scanDate, status, documentId, controlNumber, scanOperator, externalId,
+                                                            internalId, source, fileType, fileSize, receivedDate, message, otherData, url,
+                                                            docCategory, macId, batchName);
+                }
+                
+            }
+            
+            return apiResponse;
         }
 
         /// <summary>
