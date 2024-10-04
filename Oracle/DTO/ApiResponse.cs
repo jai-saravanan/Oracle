@@ -20,6 +20,7 @@ namespace Oracle.DTO
         Unknown = 0,
         Success = 1,
         Failed = 2,
-        Warnings = 3
+        Warnings = 3,
+        Error = 4
     }
 }
