@@ -39,5 +39,7 @@ namespace Oracle.DTO
         public Boolean CanWriteImage { get; set; }
 
         public Boolean CanDeleteImage { get; set; }
+
+        public int Name { get; set; }
     }
 }
